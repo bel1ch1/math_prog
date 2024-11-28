@@ -1,24 +1,30 @@
-def caesar_cipher(text, shift):
-    result = ""
-    for char in text:
-        if char.isalpha():
-            shift_base = ord('A') if char.isupper() else ord('a')
-            result += chr((ord(char) - shift_base + shift) % 26 + shift_base)
-        else:
-            result += char
-    return result
+al = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюяабвгдеёжзийклмнопрстуфхцчшщъыьэюя'
+chois = int(input())
 
-def main():
-    action = input("Выберите действие (шифрование/дешифрование): ").strip().lower()
-    text = input("Введите текст: ")
-    shift = int(input("Введите сдвиг: "))
+if chois == 1: # шифровка
+    val = input()
+    key = int(input())
+    val_lov = val.lower()
+    vald = ''
 
-    if action == "шифрование":
-        print("Зашифрованный текст:", caesar_cipher(text, shift))
-    elif action == "дешифрование":
-        print("Расшифрованный текст:", caesar_cipher(text, -shift))
-    else:
-        print("Неверное действие!")
+    for letter in val_lov:
+        pos = al.find(letter)
+        new_pos = pos + key
+        if letter in al:
+            vald = vald + al[new_pos]
+        else: vald = vald+ letter
+    print(vald)
 
-if __name__ == "__main__":
-    main()
+elif chois == 2: # Расшифровка
+    val = input()
+    key = int(input())
+    val_lov = val.lower()
+    vald = ''
+
+    for letter in val_lov:
+        pos = al.find(letter)
+        new_pos = pos - key
+        if letter in al:
+            vald = vald + al[new_pos]
+        else: vald = vald+ letter
+    print(vald)

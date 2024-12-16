@@ -1,21 +1,27 @@
 import numpy as np
+
 import matplotlib.pyplot as plt
 
-# Параметры спирали
-num_points = 1000  # Количество точек
-theta = np.linspace(0, 4 * np.pi, num_points)  # Угол
-r = theta  # Радиус (линейная спираль)
+num_particles = 100
 
-# Координаты точек
-x = r * np.cos(theta)
-y = r * np.sin(theta)
+x = np.zeros(num_particles)
+y = np.zeros(num_particles)
 
-# Создание графика
-plt.figure(figsize=(8, 8))
-plt.plot(x, y, color='blue')
-plt.title('Спираль')
-plt.xlabel('X')
-plt.ylabel('Y')
-plt.axis('equal')  # Сохранение пропорций
-plt.grid()
+velocities = np.random.rand(num_particles, 2) * 2 - 1
+
+time_steps = 100
+dt = 0.1
+
+plt.figure()
+plt.scatter(x, y, color='blue', label='Initial Position')
+
+for t in range(time_steps):
+    x += velocities[:, 0] * dt
+    y += velocities[:, 1] * dt
+    plt.scatter(x, y, color='red', alpha=0.1)
+
+plt.title('Particle Dispersion from Center')
+plt.xlabel('X Coordinate')
+plt.ylabel('Y Coordinate')
+plt.legend()
 plt.show()
